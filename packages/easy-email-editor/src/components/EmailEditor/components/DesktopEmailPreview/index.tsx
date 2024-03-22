@@ -8,7 +8,13 @@ import { classnames } from '@/utils/classnames';
 import { SYNC_SCROLL_ELEMENT_CLASS_NAME } from '@/constants';
 import { createPortal } from 'react-dom';
 
-export function DesktopEmailPreview() {
+export interface DesktopEmailPreviewProps {
+  noPadding?: boolean;
+}
+
+export const DesktopEmailPreview: React.FC<DesktopEmailPreviewProps> = ({
+  noPadding = false,
+}) => {
   const { activeTab } = useActiveTab();
   const { errMsg, reactNode } = usePreviewEmail();
 
@@ -66,10 +72,15 @@ export function DesktopEmailPreview() {
               overflow: 'auto',
               margin: 'auto',
 
-              paddingLeft: 10,
-              paddingRight: 10,
-              paddingTop: 40,
-              paddingBottom: 140,
+              ...(noPadding === true
+                ? {}
+                : {
+                  paddingLeft: 10,
+                  paddingRight: 10,
+                  paddingTop: 40,
+                  paddingBottom: 140,
+                }),
+
               boxSizing: 'border-box',
             }}
           >

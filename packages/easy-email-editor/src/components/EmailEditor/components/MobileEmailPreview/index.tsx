@@ -11,7 +11,13 @@ import { useActiveTab } from '@/hooks/useActiveTab';
 const MOBILE_WIDTH = 320;
 const MOBILE_Height = 640;
 
-export function MobileEmailPreview() {
+export interface MobileEmailPreviewProps {
+  noPadding?: boolean;
+}
+
+export const MobileEmailPreview: React.FC<MobileEmailPreviewProps> = ({
+  noPadding = false,
+}) => {
   const { mobileWidth } = usePreviewEmail();
   const { activeTab } = useActiveTab();
 
@@ -36,7 +42,11 @@ export function MobileEmailPreview() {
         alignItems: 'center',
         justifyContent: 'center',
         overflow: 'auto',
-        padding: '10px 0px',
+        ...(noPadding === true
+          ? {}
+          : {
+              padding: '10px 0px',
+            }),
         boxSizing: 'border-box',
       }}
     >
